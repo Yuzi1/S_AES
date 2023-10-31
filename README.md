@@ -4,7 +4,7 @@
 2.1第1关：基本测试      
 根据S-AES算法编写和调试程序，提供GUI解密支持用户交互。输入可以是16bit的数据和16bit的密钥，输出是16bit的密文。
 加密代码：
-'''Java
+```Java
 import java.util.Arrays;
 
 public class Encrypt {
@@ -332,8 +332,9 @@ public class Encrypt {
         return true;
     }
 }
-'''
+```
 解密代码：
+```Java
 import java.util.Arrays;
 
 public class Decrypt {
@@ -664,6 +665,7 @@ public class Decrypt {
         return true;
     }
 }
+```
 运行结果：
 首页界面：
 <img width="291" alt="index" src="https://github.com/Yuzi1/S_AES/assets/94826086/14c12698-1bf5-42a9-825a-8fc462ff2c92">
@@ -680,6 +682,7 @@ public class Decrypt {
 
 2.3 第3关：扩展功能考虑到向实用性扩展，加密算法的数据输入可以是ASII编码字符串(分组为2 Bytes)，对应地输出也可以是ACII字符串(很可能是乱码)。
 代码：
+```Java
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -848,6 +851,7 @@ public class EncryptWindow extends JFrame {
     }
 
 }
+```
 加密和解密算法不变。
 运行结果：
 <img width="291" alt="String" src="https://github.com/Yuzi1/S_AES/assets/94826086/cd761f69-2c5b-4236-b9e5-6f921a837a9d">
@@ -855,6 +859,7 @@ public class EncryptWindow extends JFrame {
 2.4 第4关：多重加密
 2.4.1 双重加密将S-AES算法通过双重加密进行扩展，分组长度仍然是16 bits，但密钥长度为32 bits。
 加密部分核心代码：
+```Java
 public void actionPerformed(ActionEvent e) {
                 String plaintext = inputText.getText();
                 String key = keyText.getText();
@@ -950,7 +955,9 @@ public void actionPerformed(ActionEvent e) {
 
                 resultArea.setText(result);
             }
-解密部分核心代码：        
+```
+解密部分核心代码：  
+```Java
 public void actionPerformed(ActionEvent e) {
                 String ciphertext  = inputText.getText();
                 String key = keyText.getText();
@@ -1038,12 +1045,14 @@ public void actionPerformed(ActionEvent e) {
 
                 resultArea.setText(result);
             }
+```
 运行结果：
 <img width="291" alt="双重加密" src="https://github.com/Yuzi1/S_AES/assets/94826086/4b605266-841a-4519-97c0-f9cd3467e104">
 <img width="291" alt="双重解密" src="https://github.com/Yuzi1/S_AES/assets/94826086/ecb42761-8dde-4df6-8210-529bc2601e88">
 
 2.4.2 中间相遇攻击假设你找到了使用相同密钥的明、密文对(一个或多个)，请尝试使用中间相遇攻击的方法找到正确的密钥Key(K1+K2)。
 代码如下：
+```Java
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -1141,11 +1150,13 @@ public class MidAttack {
         return binaryArray;
     }
 }
+```
 运行结果：
 <img width="640" alt="MidAttack" src="https://github.com/Yuzi1/S_AES/assets/94826086/3c5aac9b-e19f-43d5-a1a7-144802ee7f8d">
 
 2.4.3 三重加密将S-AES算法通过三重加密进行扩展，按照32 bits密钥Key(K1+K2)的模式进行三重加密解密。
 加密核心代码：
+```Java
 public void actionPerformed(ActionEvent e) {
                 String plaintext = inputText.getText();
                 String key = keyText.getText();
@@ -1253,7 +1264,9 @@ public void actionPerformed(ActionEvent e) {
 
                 resultArea.setText(result);
             }
+```
 解密核心代码：
+```Java
 public void actionPerformed(ActionEvent e) {
                 String ciphertext  = inputText.getText();
                 String key = keyText.getText();
@@ -1351,6 +1364,7 @@ public void actionPerformed(ActionEvent e) {
 
                 resultArea.setText(result);
             }
+```
 运行结果：
 加密：
 <img width="291" alt="三重加密" src="https://github.com/Yuzi1/S_AES/assets/94826086/695bbc6f-2958-4b15-880e-ae41742469c4">
@@ -1359,6 +1373,7 @@ public void actionPerformed(ActionEvent e) {
 
 2.5 第5关：工作模式基于S-AES算法，使用密码分组链(CBC)模式对较长的明文消息进行加密。注意初始向量(16 bits) 的生成，并需要加解密双方共享。在CBC模式下进行加密，并尝试对密文分组进行替换或修改，然后进行解密，请对比篡改密文前后的解密结果。
 代码如下：
+```Java
 import java.util.Arrays;
 
 public class CBC {
@@ -1453,5 +1468,6 @@ public class CBC {
     }
 
 }
+```
 运行结果：
 <img width="1280" alt="CBC" src="https://github.com/Yuzi1/S_AES/assets/94826086/b9d9f7f7-c116-41e1-9737-62ff4c5fe068">
